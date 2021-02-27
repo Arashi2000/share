@@ -15,8 +15,22 @@
 <script>
 import HeaderAuth from "../components/HeaderAuth";
 export default {
+  data() {
+    return {
+      email: "",
+      password: ""
+    };
+  },
   components: {
     HeaderAuth
+  },
+  methods: {
+    auth() {
+      this.$store.dispatch("login", {
+        email: this.email,
+        password: this.password
+      });
+    }
   }
 };
 </script>
@@ -57,5 +71,4 @@ input {
 .form button {
  margin-top: 15px;
 }
-
 </style>

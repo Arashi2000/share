@@ -8,6 +8,39 @@
 </div>
 </template>
 
+<script>
+import axios from "axios";
+export default {
+  data() {
+    return {
+      share: "",
+    };
+  },
+  methods: {
+    send() {
+      if (this.share === "") {
+        alert("シェアする内容を入力してください");
+      } else {
+        axios
+        .post("https://salty-waters-72803.herokuapp.com/api/shares", {
+          user_id: this.$store.state.user_id,
+          share: this.share,
+        })
+        .then((response) => {
+          console.log(response);
+          alert("シェアしました");
+          this.share = "";
+          this.$router.go({
+            path: this.$$router.currentRoute.path,
+            force: true,
+          });
+        });
+      }
+    },
+  },
+};
+</script>
+
 <style scoped>
 .share {
   margin: 15px;
